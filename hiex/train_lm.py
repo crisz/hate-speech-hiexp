@@ -27,6 +27,8 @@ def makedirs(name):
 def do_train_lm(model, lm_dir, lm_epochs, train_iter, dev_iter, save_every=500, dev_every=500):
     opt = O.Adam(filter(lambda x: x.requires_grad, model.parameters()), lr=0.0002)
 
+    save_every = 20
+    dev_every = 20
     iterations = 0
     start = time.time()
     best_dev_nll = 1e10
