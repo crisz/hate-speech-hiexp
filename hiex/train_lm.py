@@ -7,6 +7,9 @@ import torch
 
 import os
 
+from tqdm import tqdm
+
+
 def makedirs(name):
     import os, errno
 
@@ -40,10 +43,11 @@ def do_train_lm(model, lm_dir, lm_epochs, train_iter, dev_iter, save_every=500, 
     print(model)
 
     for epoch in range(lm_epochs):
+        print(">>> Epoch {} ".format(epoch))
         if all_break:
             break
         train_loss = 0
-        for batch_idx, batch in enumerate(train_iter):
+        for batch_idx, batch in tqdm(enumerate(train_iter)):
             batch.text = batch.text.transpose(0,1) # from batch first to time-step first
             # switch model to training mode, clear gradient accumulators
             model.train()

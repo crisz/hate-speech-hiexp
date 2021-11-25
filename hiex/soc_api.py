@@ -60,7 +60,7 @@ class SamplingAndOcclusionExplain:
     def train_lm(self):
         logger.info('Missing pretrained LM. Now training')
         model = BiGRULanguageModel(self.configs, vocab=self.vocab, device=self.device).to(self.device)
-        do_train_lm(model, lm_dir=self.lm_dir, lm_epochs=20,
+        do_train_lm(model, lm_dir=self.lm_dir, lm_epochs=5,
                     train_iter=self.train_dataloader, dev_iter=self.dev_dataloader)
 
     def word_level_explanation_bert(self, input_ids, input_mask, segment_ids, label=None):
