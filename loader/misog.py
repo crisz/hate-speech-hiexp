@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import torch
 
-DATASET_PATH_BASE = Path('..') / 'data'
+DATASET_PATH_BASE = Path('.') / 'data'
 DEV_PATH = DATASET_PATH_BASE / 'misogyny_EN' / 'miso_dev.tsv'
 TRAIN_PATH = DATASET_PATH_BASE / 'misogyny_EN' / 'miso_train.tsv'
 TEST_PATH = DATASET_PATH_BASE / 'misogyny_EN' / 'miso_test.tsv'
@@ -26,6 +26,7 @@ class MisogProcessor(DataProcessor):
 
     @staticmethod
     def load_misogyny_dataset(path):
+        print("Loading {} from {} ".format(path, os.getcwd()))
         df = pd.read_csv(path, sep='\t')[['text', 'misogynous']]
         npy = df.values
         dataset = np.swapaxes(npy, 0, 1)
