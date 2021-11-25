@@ -50,16 +50,16 @@ class MisogProcessor(DataProcessor):
         :param label:
         :return:
         """
-        df = None
+        data = None
+        labels = None
         if split == "test" or split == "dev":
-            df = self.load_misogyny_val_dataset()
+            labels, data = self.load_misogyny_val_dataset()
         else:
-            df = self.load_misogyny_train_dataset()
+            labels, data = self.load_misogyny_train_dataset()
 
         # noinspection PyTypeChecker
-        sentence_label_pairs = [[x, y] for x, y in zip(df['text'], df['misogynous'])]
         examples = []
-        for i, (sentence, label) in enumerate(sentence_label_pairs):
+        for i, (label, sentence) in enumerate(zip(labels, data)):
             example = InputExample(text_a=sentence, guid='%s-%s' % (split, i))
             label = int(label)
             example.label = label
