@@ -50,6 +50,7 @@ from bert.tokenization import BertTokenizer
 from bert.optimization import BertAdam, WarmupLinearSchedule
 
 from loader import GabProcessor, WSProcessor, NytProcessor, convert_examples_to_features
+from loader.misog import MisogProcessor
 from utils.config import configs, combine_args
 
 # for hierarchical explanation algorithms
@@ -259,13 +260,15 @@ def main():
     processors = {
         'gab': GabProcessor,
         'ws': WSProcessor,
-        'nyt': NytProcessor
+        'nyt': NytProcessor,
+        'misog': MisogProcessor,
     }
 
     output_modes = {
         'gab': 'classification',
         'ws': 'classification',
-        'nyt': 'classification'
+        'nyt': 'classification',
+        'misog': 'classification',
     }
 
     if args.local_rank == -1 or args.no_cuda:
