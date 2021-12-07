@@ -496,7 +496,7 @@ def main():
                     optimizer.zero_grad()
                     global_step += 1
 
-                if global_step % 200 == 0:
+                if global_step % 20 == 0:
                     val_result = validate(args, model, processor, tokenizer, output_mode, label_list, device,
                                           num_labels,
                                           task_name, tr_loss, global_step, epoch, explainer)
@@ -701,6 +701,7 @@ def explain(args, model, processor, tokenizer, output_mode, label_list, device):
     eval_sampler = SequentialSampler(eval_data)
     eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
+    args.hiex_idxs = None
     if args.hiex_idxs:
         with open(args.hiex_idxs) as f:
             hiex_idxs = json.load(f)['idxs']
